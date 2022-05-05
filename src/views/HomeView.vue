@@ -20,7 +20,7 @@
         </el-row>
 
         <a href="/board/write" class="write_btn">
-            <img src="/assets/images/pen_icon.png" />
+            <img src="@/assets/images/pen_icon.png" />
         </a>
     </div>
 </template>
