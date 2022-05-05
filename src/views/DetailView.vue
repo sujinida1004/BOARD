@@ -1,12 +1,19 @@
 <template>
     <div>
-        <p>{{ article.id }}</p>
-        <p>{{ article.userId }}</p>
-        <p>{{ article.title }}</p>
-        <p>{{ article.body }}</p>
+        <el-row>
+            <el-col :span="2"></el-col>
+            <el-col :span="20">
+                <el-container>
+                    <el-header>{{ article.title }}</el-header>
+                    <el-main>{{ article.body }}</el-main>
+                </el-container>
+            </el-col>
+            <el-col :span="2"></el-col>
+        </el-row>
 
-        <br>
-        <el-button @click="goBack">Back</el-button>
+        <br />
+        <el-button type="success" @click="goBack">Back</el-button>
+        <el-button type="success" @click="editArticle">수정</el-button>
     </div>
 </template>
 
@@ -25,7 +32,8 @@ export default {
     // article 속성의 파라메터로 넘어온 id를 지정
     // 경로 맨 뒤에 콜론id에 입력한 값이 로딩되었을때 article 속성에 적용
     mounted() {
-        apiBoard.getArticle(this.$route.params.id)
+        apiBoard
+            .getArticle(this.$route.params.id)
             .then((response) => {
                 this.article = response.data;
             })
@@ -38,6 +46,9 @@ export default {
     methods: {
         goBack() {
             this.$router.go(-1);
+        },
+        editArticle() {
+            this.$router.push({path: `/board/write/${this.$route.params.id}`})
         }
     },
 }
